@@ -1,25 +1,41 @@
 "use strict";
 import "paper";
 
-export class Dial {
+export class Dial extends paper.Group {
   constructor(minValue, maxValue, label, drawOptions) {
+    super(drawOptions);
+
     this.minValue = minValue;
     this.maxValue = maxValue;
-    this.drawOptions = drawOptions;
-    this.indicator = new paper.Path.Line({
-      from: [this.drawOptions.center.x, this.drawOptions.center.y - 2],
-      to: [this.drawOptions.center.x, this.drawOptions.center.y - this.drawOptions.radius],
-      strokeColor: this.drawOptions.strokeColor});
-    this.circle = new paper.Path.Circle(drawOptions);
-    new paper.PointText({
+    const indicator = new paper.Path.Line({
+      from: [drawOptions.center.x, drawOptions.center.y - 2],
+      to: [drawOptions.center.x, drawOptions.center.y - drawOptions.radius],
+      strokeColor: drawOptions.strokeColor});
+    const circle = new paper.Path.Circle(drawOptions);
+    const labelControl = new paper.PointText({
       point: [
-        this.drawOptions.center.x,
-        this.drawOptions.center.y + 20
+        drawOptions.center.x,
+        drawOptions.center.y + 20
       ],
       content: label,
       justification: 'center',
       fontSize: '6px',
       fontWeigth: 'bold'
     });
+
+    this.addChild(circle);
+    this.addChild(indicator);
+    this.addChild(labelControl);
+
+    this.on("mousedown", this.onMouseDown);
+    this.on("mouseup", this.onMouseUp);
+  }
+
+  onMouseDown(event) {
+    console.log(event);
+  }
+
+  onMouseUp(event) {
+    console.log(event);
   }
 };

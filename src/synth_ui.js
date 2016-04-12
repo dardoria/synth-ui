@@ -18,6 +18,7 @@ function makeDiscreteDials() {
     {center: new paper.Point(xFirstColumn, 35),
      radius: 15,
      strokeColor: 'black',
+     fillColor: 'white',
      shadowColor: new paper.Color(0, 0, 0),
      // Set the shadow blur radius to 12:
      shadowBlur: 3,
@@ -35,6 +36,7 @@ function makeDiscreteDials() {
     {center: new paper.Point(xFirstColumn, 110),
      radius: 15,
      strokeColor: 'black',
+     fillColor: 'white',
      shadowColor: new paper.Color(0, 0, 0),
      // Set the shadow blur radius to 12:
      shadowBlur: 3,
@@ -66,13 +68,14 @@ function makeDials() {
     yPos += 20;
 
     while (yIndex < 3) {
-      new Dial(
+      const dial = new Dial(
         0,
         127,
         labels[labelIndex],
         {center: new paper.Point(xPos, yPos),
          radius: 8,
          strokeColor: 'black',
+         fillColor: 'white',
          shadowColor: new paper.Color(0, 0, 0),
          // Set the shadow blur radius to 12:
          shadowBlur: 3,
@@ -104,6 +107,7 @@ function makeDelay() {
       {center: new paper.Point(xPos, yPos),
        radius: 8,
        strokeColor: 'black',
+       fillColor: 'white',
        shadowColor: new paper.Color(0, 0, 0),
        // Set the shadow blur radius to 12:
        shadowBlur: 3,
