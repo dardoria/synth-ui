@@ -27,15 +27,21 @@ export class Dial extends paper.Group {
     this.addChild(indicator);
     this.addChild(labelControl);
 
-    this.on("mousedown", this.onMouseDown);
+    this.on("mousedrag", this.onMouseDrag);
     this.on("mouseup", this.onMouseUp);
   }
 
-  onMouseDown(event) {
-    console.log(event);
+  onMouseDrag(event) {
+    // todo limit rotation
+    const angle = Math.atan2(event.delta.x, event.delta.y) * 5;
+    this.children[1].rotate(
+      angle,
+      this.children[0].position
+    );
   }
 
   onMouseUp(event) {
+    // todo send midi
     console.log(event);
   }
 };

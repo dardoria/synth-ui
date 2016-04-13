@@ -11,9 +11,7 @@ export class Button extends paper.Group {
       radius: 2,
       fillColor: drawOptions.fillColor,
       shadowColor: new paper.Color(0, 0, 0),
-      // Set the shadow blur radius to 12:
       shadowBlur: 3,
-      // Offset the shadow by { x: 5, y: 5 }
       shadowOffset: new paper.Point(1, 2)
     });
 
@@ -29,9 +27,20 @@ export class Button extends paper.Group {
 
     // a workaround for https://github.com/paperjs/paper.js/issues/640
     this.on("mousedown", this.onMouseDown);
+    this.on("mouseup", this.onMouseUp);
   }
 
   onMouseDown(event) {
-    console.log(event);
+    this.firstChild.set({
+      shadowColor: new paper.Color(1, 1, 1)
+    });
+    //todo send MIDI
+  }
+
+  onMouseUp(event) {
+    this.firstChild.set({
+      shadowColor: new paper.Color(0, 0, 0)
+    });
+    //todo send MIDI
   }
 };
