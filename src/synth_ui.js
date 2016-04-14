@@ -101,8 +101,8 @@ function makeDelay() {
   let labelIndex = 0;
   while (xIndex < 4) {
     new Dial(
-      0,
-      127,
+      20,
+      120,
       labels[labelIndex],
       {center: new paper.Point(xPos, yPos),
        radius: 8,
