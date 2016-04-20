@@ -58,16 +58,31 @@ export class DiscreteDial extends paper.Group {
     const angle = Math.floor(Math.atan2(event.delta.x, event.delta.y) * 10);
     this.selectedAngle = (this.selectedAngle + angle) % 360;
 
+    this.setMark(angle);
+  }
+
+  onMouseUp(event) {
+    const step = 360 / this.values.length;
+    const diff = Math.abs(this.selectedAngle % step);
+    let angle = 0;
+
+    if (diff >= step/2) {
+      angle = step - diff;
+    } else {
+      angle = -diff;
+    }
+
+    const sign = this.selectedAngle < 0 ? -1 : 1
+
+    this.setMark(angle * sign);
+    this.selectedAngle = 0;
+  }
+
+  setMark(angle) {
+    // todo set value
     this.children[1].rotate(
       angle,
       this.children[0].position
     );
-  }
-
-  onMouseUp(event) {
-    let step = 360 / this.values.length;
-    console.log(this.selectedAngle);
-    console.log(this.selectedAngle / step);
-
   }
 };
