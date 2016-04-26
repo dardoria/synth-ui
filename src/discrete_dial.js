@@ -33,12 +33,12 @@ export class DiscreteDial extends paper.Group {
         strokeColor: drawOptions.strokeColor
       });
 
-      let xTextOffset = xOffset > 0 ? 5.5 : 13.3; //todo this must account for text width
-      let yTextOffset = yOffset < 0 ? 5.5 : 13.3; //this this must account for text height
+      let xTextOffset = xOffset >= 0 ? 5.5 : (this.values[index][0].length * 9 / 2);
+      let yTextOffset = yOffset <= 0 ? 5.5 : yOffset == 1 ? 10: 15;
 
       let legend = new paper.PointText({
         point: [
-          drawOptions.center.x + (((drawOptions.radius + xTextOffset) * xOffset)),
+          drawOptions.center.x + ((drawOptions.radius + xTextOffset) * xOffset),
           drawOptions.center.y + ((drawOptions.radius + yTextOffset) * yOffset)
         ],
         content: this.values[index][0],

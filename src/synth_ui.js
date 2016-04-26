@@ -6,55 +6,53 @@ import {Dial} from "./dial";
 import {Button} from "./button";
 
 const xFirstColumn = 35;
+const yFirstColumn = 35;
 
 function makeDiscreteDials() {
-  new DiscreteDial(
+  const rowHeight = 75;
+  const dials = [
     [["Poly", 32],
-     ["Unison'", 16],
+     ["Unison", 16],
      ["Octave", 8],
      ["Fifth", 4],
      ["Unison\n Ring", 2],
      ["Poly\n Ring", 1]],
-    {center: new paper.Point(xFirstColumn, 35),
-     radius: 15,
-     strokeColor: 'black',
-     fillColor: 'white',
-     shadowColor: new paper.Color(0, 0, 0),
-     // Set the shadow blur radius to 12:
-     shadowBlur: 3,
-    // Offset the shadow by { x: 5, y: 5 }
-     shadowOffset: new paper.Point(1, 2)}
-  );
-  new DiscreteDial(
-    [
-      ["32'", 32],
-      ["16'", 16],
-      ["8'", 8],
-      ["4'", 4],
-      ["2'", 2],
-      ["1'", 1]],
-    {center: new paper.Point(xFirstColumn, 110),
-     radius: 15,
-     strokeColor: 'black',
-     fillColor: 'white',
-     shadowColor: new paper.Color(0, 0, 0),
-     // Set the shadow blur radius to 12:
-     shadowBlur: 3,
-    // Offset the shadow by { x: 5, y: 5 }
-     shadowOffset: new paper.Point(1, 2)}
-  );
+    [["32'", 32],
+     ["16'", 16],
+     ["8'", 8],
+     ["4'", 4],
+     ["2'", 2],
+     ["1'", 1]]
+  ]
+
+  for (let i = 0; i < dials.length; i++) {
+    new DiscreteDial(
+      dials[i],
+      {center: new paper.Point(xFirstColumn, yFirstColumn + (i * rowHeight)),
+       radius: 15,
+       strokeColor: 'black',
+       fillColor: 'white',
+       shadowColor: new paper.Color(0, 0, 0),
+       shadowBlur: 3,
+       shadowOffset: new paper.Point(1, 2)}
+    );
+  }
 }
 
 function makeDials() {
   let xPos = 100;
+  let startYPos = 15;
+  let yLabelDistance = 20;
+  let rowHeight = 39;
+  let columnWidth = 50;
   let xIndex = 0;
   let labelIndex = 0;
   let labels = ['DETUNE', 'PORTAMENTO', 'EG INT', 'CUTOFF', 'PEAK', 'EG INT', 'RATE', 'PITCH INT', 'CUTOFF INT', 'ATTACK', 'DECAY/RELEASE', 'SUSTAIN'];
   let categories = ['VCO', 'VCF', 'LFO', 'EG'];
 
   while (xIndex < 4) {
-    let yPos = 15;
     let yIndex = 0;
+    let yPos = startYPos;
 
     new paper.PointText({
       point: [xPos, yPos],
@@ -65,7 +63,7 @@ function makeDials() {
       fontSize: 10
     });
 
-    yPos += 20;
+    yPos += yLabelDistance;
 
     while (yIndex < 3) {
       const dial = new Dial(
@@ -84,11 +82,11 @@ function makeDials() {
       );
 
       labelIndex++;
-      yPos += 39;
+      yPos += rowHeight;
       yIndex++;
     }
 
-    xPos += 50;
+    xPos += columnWidth;
     xIndex++;
   };
 }
@@ -191,3 +189,5 @@ makeDelay();
 makeButtons();
 makeKeyBoard1();
 makeKeyBoard2();
+paper.view.scale(2.5, new paper.Point(0, 0));
+paper.view.translate(100,20);
