@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
   <title>Synth UI example</title>
   <script type="text/javascript" src="paper.js"></script>
-  <script type="text/paperscript" src="main.js" canvas="synth"></script>
+  <script type="text/javascript" src="synth_ui.vkeys.js"></script>
+  <script type="text/paperscript" canvas="synth">
+    var v = new synth_ui.vkeys.VKeys();
+  </script>
   <style>
   html,
   body {

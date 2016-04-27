@@ -2,10 +2,14 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var path = require('path');
 
 module.exports = {
-  entry: './src/synth_ui.js',
+  entry: {
+    vkeys: "./src/synths/vkeys"
+  },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'main.js'
+    filename: "synth_ui.[name].js",
+    library: ["synth_ui", "[name]"],
+    libraryTarget: "var"
   },
   plugins: [
     new CopyWebpackPlugin([
